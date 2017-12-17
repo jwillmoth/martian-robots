@@ -1,9 +1,9 @@
 'use strict';
 
 class Mars {
-    constructor(height, width) {
-        this.height = height;
-        this.width = width;
+    constructor(maxX, maxY) {
+        this.maxX = maxX;
+        this.maxY = maxY;
         this.scentedPositions = new Array();
     }
 

@@ -20,7 +20,7 @@ class Robot {
         this.y = y;
         this.orientation;
         this.mars = mars;
-        this.islost = false;
+        this.isLost = false;
     }
 
     move(instruction) {
