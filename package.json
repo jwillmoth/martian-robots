@@ -1,0 +1,19 @@
+{
+  "name": "martian-robots",
+  "version": "1.0.0",
+  "description": "Solution for the Martian Robots problem",
+  "main": "martian-robots.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwillmoth/martian-robots.git"
+  },
+  "author": "James Willmoth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jwillmoth/martian-robots/issues"
+  },
+  "homepage": "https://github.com/jwillmoth/martian-robots#readme"
+}
