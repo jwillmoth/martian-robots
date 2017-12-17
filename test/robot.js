@@ -7,7 +7,7 @@ function GetMars() {
     return new Mars(10, 10);
 }
 
-const defaultX = 10;
+const defaultX = 5;
 const defaultY = 7;
 const defaultOrientation = Robot.ORIENTATION.EAST;
 function GetRobot() {
@@ -70,9 +70,9 @@ describe('Robot class', () => {
         
         describe('when it would move the robot off grid', () => {
             var normalMars = GetMars();
-            var lostStartX = 1;
-            var lostStartY = 1;
-            var lostRobot = new Robot(lostStartX, lostStartY,Robot.ORIENTATION.SOUTH, normalMars);
+            var lostStartX = 0;
+            var lostStartY = 0;
+            var lostRobot = new Robot(lostStartX, lostStartY, Robot.ORIENTATION.SOUTH, normalMars);
             lostRobot.move(Robot.INSTRUCTION.FORWARD);
 
             it('should not change co-ordinates', () => {

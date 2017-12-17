@@ -4,7 +4,7 @@
   "description": "Solution for the Martian Robots problem",
   "main": "martian-robots.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
     "type": "git",
