@@ -18,7 +18,7 @@ function rotate(orientation, bLeft) {
     //get an array of the orientation values
     var arrOrientations = Object.keys(ORIENTATION).map((k) => ORIENTATION[k]);
 
-    //rotate by looking at the next (for right or previous for left) value
+    //rotate by looking at the next (for right) or previous (for left) value
     var modifier = (bLeft ? -1 : 1);
     var rotatedIndex = (arrOrientations.indexOf(orientation) + modifier) % arrOrientations.length;
     //slice can cope with negative indexes

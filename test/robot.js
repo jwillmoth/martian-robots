@@ -87,6 +87,24 @@ describe('Robot class', () => {
             it('isLost should be true', () => {
                 expect(lostRobot.isLost).to.be.true;
             })
+
+            describe('but the coordinate is scented', () => {
+                var normalMarsWithScent = GetMars();
+                var notLostStartX = 0;
+                var notLostStartY = 0;
+                normalMarsWithScent.addScented(notLostStartX, notLostStartY);
+                var notLostRobot = new Robot(notLostStartX, notLostStartY, Robot.ORIENTATION.SOUTH, normalMarsWithScent);
+                notLostRobot.move(Robot.INSTRUCTION.FORWARD);
+
+                it('should not change co-ordinates', () => {
+                    expect(notLostRobot.x).to.equal(notLostStartX);
+                    expect(notLostRobot.y).to.equal(notLostStartY);
+                })
+                
+                it('isLost should be false', () => {
+                    expect(notLostRobot.isLost).to.be.false;
+                })
+            })
         })
     })
 })
