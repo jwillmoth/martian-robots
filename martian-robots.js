@@ -1,29 +1,29 @@
 'use strict';
 
-var Mars = require('./mars.js');
-var Robot = require('./robot.js');
+const Mars = require('./mars.js');
+const Robot = require('./robot.js');
 
 function ParseInstructions(instructions) {
     //regex should match only expected instructions
-    var rxAllInstructions = /^(\d+) (\d+)\n((\d+ \d+ [NESW]\n[RLF]+\n?)+)$/m;
+    const rxAllInstructions = /^(\d+) (\d+)\n((\d+ \d+ [NESW]\n[RLF]+\n?)+)$/m;
 
-    var matches = rxAllInstructions.exec(instructions);
+    const matches = rxAllInstructions.exec(instructions);
 
-    if (matches == null) throw 'Invalid instructions';
+    if (matches == null) throw new Error('Invalid instructions');
 
-    var [, maxX, maxY, unparsedRobotInstructions] = matches;
-    var mars = new Mars(maxX, maxY);
+    const [, maxX, maxY, unparsedRobotInstructions] = matches;
+    const mars = new Mars(maxX, maxY);
 
-    var rxRobotInstructions = /(\d+) (\d+) ([NESW])\n([RLF]+)/gm;
+    const rxRobotInstructions = /(\d+) (\d+) ([NESW])\n([RLF]+)/gm;
 
-    var robotInstructions = unparsedRobotInstructions.match(rxRobotInstructions);
+    const robotInstructions = unparsedRobotInstructions.match(rxRobotInstructions);
 
-    var results = robotInstructions.map((robotInstruction) => {
-        //we're reusing this regex, we need to reset the lastIndex to avoid oddities.
+    const results = robotInstructions.map((robotInstruction) => {
+        //we're reusing this regex so we need to reset the lastIndex to avoid oddities.
         rxRobotInstructions.lastIndex = 0;
-         let [,x,y,orientation,moves] = rxRobotInstructions.exec(robotInstruction);
+        const [,x,y,orientation,moves] = rxRobotInstructions.exec(robotInstruction);
 
-        let robot = new Robot(x, y, orientation, mars);
+        const robot = new Robot(x, y, orientation, mars);
         for (let i=0; i<moves.length; i++) {
             robot.move(moves.charAt(i));
         }

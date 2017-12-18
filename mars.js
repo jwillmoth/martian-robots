@@ -2,8 +2,8 @@
 
 class Mars {
     constructor(maxX, maxY) {
-        if (maxX > 50 || maxX < 0) throw 'Invalid maxX';
-        if (maxY > 50 || maxY < 0) throw 'Invalid maxY';
+        if (maxX > 50 || maxX < 0) throw new Error('Invalid maxX');
+        if (maxY > 50 || maxY < 0) throw new Error('Invalid maxY');
         
         this.maxX = maxX;
         this.maxY = maxY;
@@ -15,7 +15,7 @@ class Mars {
     }
 
     addScented(x, y) {
-        if (this.isOffGrid(x, y)) throw 'Invalid coordinates';
+        if (this.isOffGrid(x, y)) throw new Error('Invalid coordinates');
 
         if (typeof(this.scentedPositions[x]) === 'undefined') {
             this.scentedPositions[x] = new Array();
@@ -24,7 +24,7 @@ class Mars {
     }
     
     isScented(x, y) {
-        if (this.isOffGrid(x, y)) throw 'Invalid coordinates';
+        if (this.isOffGrid(x, y)) throw new Error('Invalid coordinates');
 
         if (typeof(this.scentedPositions[x]) !== 'undefined') {
             return typeof(this.scentedPositions[x][y]) === 'boolean';

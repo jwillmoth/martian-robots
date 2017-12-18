@@ -14,15 +14,16 @@ const ORIENTATION = {
     WEST: "W"
 }
 
-function rotate(orientation, bLeft) {
-    //get an array of the orientation values
-    var arrOrientations = Object.keys(ORIENTATION).map((k) => ORIENTATION[k]);
+function rotate(orientation, left) {
+    //get the possible orientations
+    const arrOrientations = Object.values(ORIENTATION);
 
-    //rotate by looking at the next (for right) or previous (for left) value
-    var modifier = (bLeft ? -1 : 1);
-    var rotatedIndex = (arrOrientations.indexOf(orientation) + modifier) % arrOrientations.length;
-    //slice can cope with negative indexes
-    return arrOrientations.slice(rotatedIndex)[0];
+    //reverse them if we're rotating left
+    if (left) arrOrientations.reverse();
+
+    //'rotate' by looking at the next value in the array
+    const nextIndex = (arrOrientations.indexOf(orientation) + 1) ;
+    return arrOrientations[nextIndex % arrOrientations.length];
 }
 
 function moveForward(x, y, orientation) {
@@ -45,7 +46,7 @@ function moveForward(x, y, orientation) {
 
 class Robot {
     constructor(x, y, orientation, mars) {
-        if (mars.isOffGrid(x, y)) throw 'Invalid coordinates';
+        if (mars.isOffGrid(x, y)) throw new Error('Invalid coordinates');
 
         this.x = x;
         this.y = y;
@@ -60,7 +61,7 @@ class Robot {
 
         switch (instruction) {
             case INSTRUCTION.FORWARD:
-                var {x:newX, y:newY} = moveForward(this.x, this.y, this.orientation);
+                const {x:newX, y:newY} = moveForward(this.x, this.y, this.orientation);
 
                 //check if moving would mean we've fallen off
                 if (this.mars.isOffGrid(newX, newY)) {
@@ -81,7 +82,7 @@ class Robot {
                 this.orientation = rotate(this.orientation, false);
                 break;
             default:
-                throw 'Invalid instruction.';
+                throw new Error('Invalid instruction.');
           }
     }
 

@@ -1,7 +1,7 @@
 'use strict';
-var Robot = require('../robot.js');
-var Mars = require('../mars.js');
-var expect = require('chai').expect;
+const Robot = require('../robot.js');
+const Mars = require('../mars.js');
+const expect = require('chai').expect;
 
 function GetMars() {
     return new Mars(10, 10);
@@ -21,7 +21,7 @@ describe('Robot class', () => {
 
     describe('constructor', () => {
         it('should create robot instances with correct properties', () => {
-            var normalRobot = GetRobot();
+            const normalRobot = GetRobot();
     
             expect(normalRobot).to.be.a('object');
             expect(normalRobot.x).to.equal(defaultX);
@@ -42,7 +42,7 @@ describe('Robot class', () => {
 
     describe('move()', () => {
         it('should move forward given FORWARD instruction', () => {
-            var normalRobot = GetRobot();
+            const normalRobot = GetRobot();
             normalRobot.move(Robot.INSTRUCTION.FORWARD);
 
             expect(normalRobot.x).to.equal(defaultX + 1);
@@ -51,7 +51,7 @@ describe('Robot class', () => {
         });
 
         it('should turn left given LEFT instruction', () => {
-            var normalRobot = GetRobot();
+            const normalRobot = GetRobot();
             normalRobot.move(Robot.INSTRUCTION.LEFT);
 
             expect(normalRobot.x).to.equal(defaultX);
@@ -60,7 +60,7 @@ describe('Robot class', () => {
         });
 
         it('should turn right given RIGHT instruction', () => {
-            var normalRobot = GetRobot();
+            const normalRobot = GetRobot();
             normalRobot.move(Robot.INSTRUCTION.RIGHT);
 
             expect(normalRobot.x).to.equal(defaultX);
@@ -69,10 +69,10 @@ describe('Robot class', () => {
         });
         
         describe('when it would move the robot off grid', () => {
-            var normalMars = GetMars();
-            var lostStartX = 0;
-            var lostStartY = 0;
-            var lostRobot = new Robot(lostStartX, lostStartY, Robot.ORIENTATION.SOUTH, normalMars);
+            const normalMars = GetMars();
+            const lostStartX = 0;
+            const lostStartY = 0;
+            const lostRobot = new Robot(lostStartX, lostStartY, Robot.ORIENTATION.SOUTH, normalMars);
             lostRobot.move(Robot.INSTRUCTION.FORWARD);
 
             it('should not change co-ordinates', () => {
@@ -89,11 +89,11 @@ describe('Robot class', () => {
             })
 
             describe('but the coordinate is scented', () => {
-                var normalMarsWithScent = GetMars();
-                var notLostStartX = 0;
-                var notLostStartY = 0;
+                const normalMarsWithScent = GetMars();
+                const notLostStartX = 0;
+                const notLostStartY = 0;
                 normalMarsWithScent.addScented(notLostStartX, notLostStartY);
-                var notLostRobot = new Robot(notLostStartX, notLostStartY, Robot.ORIENTATION.SOUTH, normalMarsWithScent);
+                const notLostRobot = new Robot(notLostStartX, notLostStartY, Robot.ORIENTATION.SOUTH, normalMarsWithScent);
                 notLostRobot.move(Robot.INSTRUCTION.FORWARD);
 
                 it('should not change co-ordinates', () => {
