@@ -20,7 +20,7 @@ function rotate(orientation, bLeft) {
 
     //rotate by looking at the next (for right or previous for left) value
     var modifier = (bLeft ? -1 : 1);
-    var rotatedIndex = arrOrientations.indexOf(orientation) + modifier;
+    var rotatedIndex = (arrOrientations.indexOf(orientation) + modifier) % arrOrientations.length;
     //slice can cope with negative indexes
     return arrOrientations.slice(rotatedIndex)[0];
 }
@@ -94,7 +94,7 @@ class Robot {
     }
 
     toString() {
-        return `${this.x} ${this.y} ${this.orientation}${this.isLost ? ' TRUE': ''}`;
+        return `${this.x} ${this.y} ${this.orientation}${this.isLost ? ' LOST': ''}`;
     }
 }
 

@@ -1,34 +1,44 @@
 'use strict';
 
 var Mars = require('./mars.js');
-var Robots = require('./robot.js');
-
-var testString = `5 3
-1 1 E
-RFRFRFRF
-3 2 N
-FRRFLLFFRRFLL
-0 3 W
-LLFFFLFLFL
-`;
+var Robot = require('./robot.js');
 
 function ParseInstructions(instructions) {
-    //todo
-    //get all the right bits from the instructions
+    //regex should match only expected instructions
+    var rxAllInstructions = /^(\d+) (\d+)\n((\d+ \d+ [NESW]\n[RLF]+\n?)+)$/m;
 
-    var mars = new Mars(1, 1);
-    var robotInstructions = new Array();
+    var matches = rxAllInstructions.exec(instructions);
 
-    var results = '';
-    for (let robotInstruction of robotInstructions) {
+    if (matches == null) throw 'Invalid instructions';
+
+    var maxX = matches[1];
+    var maxY = matches[2];
+    var mars = new Mars(maxX, maxY);
+
+    var unparsedRobotInstructions = matches[3];
+
+    var rxRobotInstructions = /(\d+) (\d+) ([NESW])\n([RLF]+)/gm;
+
+    var robotInstructions = unparsedRobotInstructions.match(rxRobotInstructions);
+
+    var results = robotInstructions.map((robotInstruction) => {
+        //we're reusing this regex, we need to reset the lastIndex to avoid oddities.
+        rxRobotInstructions.lastIndex = 0;
+        var robotDetails = rxRobotInstructions.exec(robotInstruction);
+
+        var x = robotDetails[1];
+        var y = robotDetails[2];
+        var orientation = robotDetails[3];
+        var moves = robotDetails[4];
+
         let robot = new Robot(x, y, orientation, mars);
-        for (instruction of robotInstruction.instructions) {
-            robot.move(instructions);
+        for (let i=0; i<moves.length; i++) {
+            robot.move(moves.charAt(i));
         }
-        results += robot.toString();
-    }
+        return robot.toString();
+    });
     
-    return results;
+    return results.join('\n');
 }
 
-console.log(ParseInstructions(testString));
+module.exports = ParseInstructions;
