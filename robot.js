@@ -16,14 +16,14 @@ const ORIENTATION = {
 
 function rotate(orientation, left) {
     //get the possible orientations
-    const arrOrientations = Object.values(ORIENTATION);
+    const orientations = Object.values(ORIENTATION);
 
     //reverse them if we're rotating left
-    if (left) arrOrientations.reverse();
+    if (left) orientations.reverse();
 
-    //'rotate' by looking at the next value in the array
-    const nextIndex = (arrOrientations.indexOf(orientation) + 1) ;
-    return arrOrientations[nextIndex % arrOrientations.length];
+    //'rotate' by getting the next orientation
+    const nextIndex = (orientations.indexOf(orientation) + 1) ;
+    return orientations[nextIndex % orientations.length];
 }
 
 function moveForward(x, y, orientation) {
