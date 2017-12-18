@@ -11,11 +11,8 @@ function ParseInstructions(instructions) {
 
     if (matches == null) throw 'Invalid instructions';
 
-    var maxX = matches[1];
-    var maxY = matches[2];
+    var [, maxX, maxY, unparsedRobotInstructions] = matches;
     var mars = new Mars(maxX, maxY);
-
-    var unparsedRobotInstructions = matches[3];
 
     var rxRobotInstructions = /(\d+) (\d+) ([NESW])\n([RLF]+)/gm;
 
@@ -24,12 +21,7 @@ function ParseInstructions(instructions) {
     var results = robotInstructions.map((robotInstruction) => {
         //we're reusing this regex, we need to reset the lastIndex to avoid oddities.
         rxRobotInstructions.lastIndex = 0;
-        var robotDetails = rxRobotInstructions.exec(robotInstruction);
-
-        var x = robotDetails[1];
-        var y = robotDetails[2];
-        var orientation = robotDetails[3];
-        var moves = robotDetails[4];
+         let [,x,y,orientation,moves] = rxRobotInstructions.exec(robotInstruction);
 
         let robot = new Robot(x, y, orientation, mars);
         for (let i=0; i<moves.length; i++) {

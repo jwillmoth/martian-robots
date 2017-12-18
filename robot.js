@@ -60,18 +60,18 @@ class Robot {
 
         switch (instruction) {
             case INSTRUCTION.FORWARD:
-                var newPos = moveForward(this.x, this.y, this.orientation);
+                var {x:newX, y:newY} = moveForward(this.x, this.y, this.orientation);
 
                 //check if moving would mean we've fallen off
-                if (this.mars.isOffGrid(newPos.x, newPos.y)) {
+                if (this.mars.isOffGrid(newX, newY)) {
                     //we have only actually fallen off if there isn't a scent here already
                     if (!this.mars.isScented(this.x, this.y)) {
                         this.isLost = true;
                         this.mars.addScented(this.x, this.y);
                     }
                 } else {
-                    this.x = newPos.x;
-                    this.y = newPos.y;
+                    this.x = newX;
+                    this.y = newY;
                 }
                 break;
             case INSTRUCTION.LEFT:
