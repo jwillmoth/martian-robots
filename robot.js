@@ -28,20 +28,18 @@ function rotate(orientation, left) {
 
 function moveForward(x, y, orientation) {
     switch (orientation) {
-        case ORIENTATION.NORTH:
-            y++;
+        case ORIENTATION.NORTH: y++;
             break;
-        case ORIENTATION.EAST:
-            x++;
+        case ORIENTATION.EAST: x++;
             break;
-        case ORIENTATION.SOUTH:
-            y--;
+        case ORIENTATION.SOUTH: y--;
             break;
-        case ORIENTATION.WEST:
-            x--;
+        case ORIENTATION.WEST: x--;
+            break;
+        default:
+            throw new Error('Invalid orientation');
     }
-
-    return {x: x, y: y}
+    return {x, y}
 }
 
 class Robot {
